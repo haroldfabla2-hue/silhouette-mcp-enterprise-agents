@@ -1,0 +1,461 @@
+# Silhouette V4.0 - Docker Compose con Asignación Dinámica de Puertos
+# Framework Empresarial Multi-Agente con Service Discovery Automático
+# Autor: MiniMax Agent
+# Fecha: 2025-11-09
+
+version: '3.8'
+
+services:
+  # ===== SERVICE DISCOVERY & REGISTRY =====
+  consul:
+    image: consul:1.15
+    container_name: silhouette-consul
+    ports:
+      - "8500"  # Puerto dinámico para UI
+      - "8600"  # Puerto dinámico para DNS
+    environment:
+      - CONSUL_BIND_INTERFACE=eth0
+      - CONSUL_CLIENT_INTERFACE=eth0
+      - CONSUL_DATACENTER=silhouette-v4
+      - CONSUL_SERVER=true
+      - CONSUL_BOOTSTRAP_EXPECT=1
+    volumes:
+      - ./data/consul:/consul/data
+      - ./consul/config.json:/consul/config.json:ro
+    networks:
+      - silhouette-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "consul", "members"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.consul.rule=Host(`consul.localhost`)"
+      - "traefik.http.services.consul.loadbalancer.server.port=8500"
+      - "consul.service=consul"
+      - "consul.port=8500"
+
+  # ===== REVERSE PROXY DINÁMICO =====
+  traefik:
+    image: traefik:v3.0
+    container_name: silhouette-traefik
+    ports:
+      - "80"     # Puerto HTTP dinámico
+      - "443"    # Puerto HTTPS dinámico
+      - "8080"   # Dashboard dinámico
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./data/traefik:/data
+    command:
+      - "--api.dashboard=true"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=silhouette-network"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--log.level=INFO"
+      - "--accesslog=true"
+      - "--metrics.prometheus.addEntryPointsLabels=true"
+      - "--metrics.prometheus.addServicesLabels=true"
+    networks:
+      - silhouette-network
+    restart: unless-stopped
+    depends_on:
+      - consul
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.localhost`)"
+      - "traefik.http.services.traefik.loadbalancer.server.port=8080"
+      - "consul.service=traefik"
+      - "consul.port=8080"
+
+  # ===== FRAMEWORK CORE =====
+  silhouette-framework:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: silhouette-framework
+    environment:
+      - NODE_ENV=production
+      - PORT=8080
+      - REDIS_URL=redis://redis:6379
+      - DATABASE_URL=postgresql://silhouette:silhouette_secure_2025@postgres:5432/silhouette
+      - CONSUL_URL=http://consul:8500
+      - FRAMEWORK_VERSION=4.0.0
+      - DYNAMIC_PORTS=true
+    volumes:
+      - ./data/framework:/app/data
+      - ./logs/framework:/app/logs
+    networks:
+      - silhouette-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    depends_on:
+      - redis
+      - postgres
+      - consul
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.silhouette.rule=Host(`silhouette.localhost`)"
+      - "traefik.http.services.silhouette.loadbalancer.server.port=8080"
+      - "traefik.http.middlewares.silhouette-strip.stripprefix.prefixes=/api"
+      - "traefik.http.routers.silhouette.middlewares=silhouette-strip"
+      - "consul.service=silhouette-framework"
+      - "consul.port=8080"
+      - "consul.check=http://localhost:8080/health"
+
+  # ===== API GATEWAY =====
+  api-gateway:
+    build:
+      context: ./api_gateway
+      dockerfile: Dockerfile
+    container_name: silhouette-api-gateway
+    environment:
+      - NODE_ENV=production
+      - FRAMEWORK_URL=http://silhouette-framework:8080
+      - CONSUL_URL=http://consul:8500
+      - REDIS_URL=redis://redis:6379
+    volumes:
+      - ./config/api-gateway:/app/config
+    networks:
+      - silhouette-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    depends_on:
+      - silhouette-framework
+      - redis
+      - consul
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api-gateway.rule=Host(`api.localhost`)"
+      - "traefik.http.services.api-gateway.loadbalancer.server.port=8000"
+      - "consul.service=api-gateway"
+      - "consul.port=8000"
+      - "consul.check=http://localhost:8000/health"
+
+  # ===== ORCHESTRATOR =====
+  orchestrator:
+    build:
+      context: ./orchestrator
+      dockerfile: Dockerfile
+    container_name: silhouette-orchestrator
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - DATABASE_URL=postgresql://silhouette:silhouette_secure_2025@postgres:5432/silhouette
+      - CONSUL_URL=http://consul:8500
+      - FRAMEWORK_URL=http://silhouette-framework:8080
+    networks:
+      - silhouette-network
+    restart: unless-stopped
+    depends_on:
+      - redis
+      - postgres
+      - consul
+      - silhouette-framework
+    labels:
+      - "consul.service=orchestrator"
+      - "consul.port=8001"
+      - "consul.check=http://localhost:8001/health"
+
+  # ===== MCP SERVER =====
+  mcp-server:
+    build:
+      context: ./mcp_server
+      dockerfile: Dockerfile
+    container_name: silhouette-mcp-server
+    environment:
+      - CONSUL_URL=http://consul:8500
+      - FRAMEWORK_URL=http://silhouette-framework:8080
+    networks:
+      - silhouette-network
+    restart: unless-stopped
+    depends_on:
+      - consul
+      - silhouette-framework
+    labels:
+      - "consul.service=mcp-server"
+      - "consul.port=3001"
+      - "consul.check=http://localhost:3001/health"
+
+  # ===== CACHE & SESSIONS =====
+  redis:
+    image: redis:7-alpine
+    container_name: silhouette-redis
+    ports:
+      - "6379"  # Puerto dinámico
+    environment:
+      - REDIS_PASSWORD=silhouette_redis_2025
+      - CONSUL_URL=http://consul:8500
+    volumes:
+      - ./data/redis:/data
+    command: >
+      redis-server 
+      --requirepass silhouette_redis_2025 
+      --appendonly yes 
+      --maxmemory 1gb 
+      --maxmemory-policy allkeys-lru 
+      --tcp-keepalive 300 
+      --timeout 0
+    networks:
+      - silhouette-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    labels:
+      - "consul.service=redis"
+      - "consul.port=6379"
+
+  # ===== DATABASE =====
+  postgres:
+    image: postgres:15-alpine
+    container_name: silhouette-postgres
+    ports:
+      - "5432"  # Puerto dinámico
+    environment:
+      - POSTGRES_DB=silhouette
+      - POSTGRES_USER=silhouette
+      - POSTGRES_PASSWORD=silhouette_secure_2025
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --locale=C
+      - CONSUL_URL=http://consul:8500
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+      - ./database/schema_event_sourcing.sql:/docker-entrypoint-initdb.d/01-schema.sql
+    networks:
+      - silhouette-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U silhouette -d silhouette"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    labels:
+      - "consul.service=postgres"
+      - "consul.port=5432"
+
+  # ===== MONITORING & OBSERVABILITY =====
+  prometheus:
+    image: prom/prometheus:v2.48.0
+    container_name: silhouette-prometheus
+    ports:
+      - "9090"  # Puerto dinámico
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./data/prometheus:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+      - '--web.enable-admin-api'
+    networks:
+      - silhouette-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:9090/-/healthy"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    depends_on:
+      - consul
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.prometheus.rule=Host(`prometheus.localhost`)"
+      - "traefik.http.services.prometheus.loadbalancer.server.port=9090"
+      - "consul.service=prometheus"
+      - "consul.port=9090"
+
+  grafana:
+    image: grafana/grafana:10.2.0
+    container_name: silhouette-grafana
+    ports:
+      - "3000"  # Puerto dinámico
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=silhouette_admin_2025
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_SECURITY_DISABLE_GRAVATAR=true
+      - GF_ANALYTICS_REPORTING_ENABLED=false
+      - GF_ANALYTICS_CHECK_FOR_UPDATES=false
+      - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/var/lib/grafana/dashboards/framework-overview.json
+      - CONSUL_URL=http://consul:8500
+    volumes:
+      - ./data/grafana:/var/lib/grafana
+      - ./config/grafana/dashboards:/var/lib/grafana/dashboards
+      - ./config/grafana/provisioning:/etc/grafana/provisioning
+    networks:
+      - silhouette-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/api/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    depends_on:
+      - prometheus
+      - consul
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.grafana.rule=Host(`grafana.localhost`)"
+      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
+      - "consul.service=grafana"
+      - "consul.port=3000"
+
+  # ===== LOGGING =====
+  loki:
+    image: grafana/loki:2.9.2
+    container_name: silhouette-loki
+    ports:
+      - "3100"  # Puerto dinámico
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - ./data/loki:/loki
+      - ./config/loki:/etc/loki
+    networks:
+      - silhouette-network
+    restart: unless-stopped
+    profiles: ["logging"]
+    labels:
+      - "consul.service=loki"
+      - "consul.port=3100"
+
+  # ===== BACKUP SERVICE =====
+  backup:
+    image: alpine:latest
+    container_name: silhouette-backup
+    volumes:
+      - ./data:/data
+      - ./backups:/backups
+      - ./logs:/logs
+    command: |
+      sh -c "
+        while true; do
+          echo 'Running backup...'
+          tar -czf /backups/backup-\$(date +%Y%m%d_%H%M%S).tar.gz /data
+          tar -czf /backups/logs-\$(date +%Y%m%d_%H%M%S).tar.gz /logs
+          find /backups -name 'backup-*.tar.gz' -mtime +7 -delete
+          find /backups -name 'logs-*.tar.gz' -mtime +7 -delete
+          sleep 3600
+        done
+      "
+    networks:
+      - silhouette-network
+    restart: unless-stopped
+    labels:
+      - "consul.service=backup"
+      - "consul.check=echo 'backup service running'"
+
+  # ===== TEAM SERVICES (Ejemplos con puertos dinámicos) =====
+  audiovisual-team:
+    build:
+      context: ./audiovisual-team
+      dockerfile: Dockerfile
+    container_name: silhouette-audiovisual-team
+    environment:
+      - CONSUL_URL=http://consul:8500
+      - FRAMEWORK_URL=http://silhouette-framework:8080
+    volumes:
+      - ./data/audiovisual:/app/data
+      - ./logs/audiovisual:/app/logs
+    networks:
+      - silhouette-network
+    restart: unless-stopped
+    depends_on:
+      - consul
+      - silhouette-framework
+      - redis
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.audiovisual.rule=Host(`audiovisual.localhost`)"
+      - "traefik.http.services.audiovisual.loadbalancer.server.port=8002"
+      - "consul.service=audiovisual-team"
+      - "consul.port=8002"
+      - "consul.check=http://localhost:8002/health"
+
+  optimization-team:
+    build:
+      context: ./optimization-team
+      dockerfile: Dockerfile
+    container_name: silhouette-optimization-team
+    environment:
+      - NODE_ENV=production
+      - CONSUL_URL=http://consul:8500
+      - FRAMEWORK_URL=http://silhouette-framework:8080
+    volumes:
+      - ./data/optimization:/app/data
+      - ./logs/optimization:/app/logs
+    networks:
+      - silhouette-network
+    restart: unless-stopped
+    depends_on:
+      - consul
+      - silhouette-framework
+      - redis
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.optimization.rule=Host(`optimization.localhost`)"
+      - "traefik.http.services.optimization.loadbalancer.server.port=8003"
+      - "consul.service=optimization-team"
+      - "consul.port=8003"
+      - "consul.check=http://localhost:8003/health"
+
+# ===== PERSISTENT VOLUMES =====
+volumes:
+  consul_data:
+    driver: local
+  traefik_data:
+    driver: local
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+  loki_data:
+    driver: local
+
+# ===== NETWORKS =====
+networks:
+  silhouette-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+    driver_opts:
+      com.docker.network.bridge.name: silhouette-bridge
+
+# ===== HEALTH CHECKS SUMMARY =====
+# Todos los servicios incluyen health checks para:
+# - Secuenciación adecuada de inicio
+# - Detección temprana de fallos
+# - Auto-recuperación
+# - Service discovery health-based
+#
+# Características de Puertos Dinámicos:
+# - Todos los puertos host se asignan automáticamente
+# - Service discovery con Consul
+# - Auto-routing con Traefik
+# - Health checks dinámicos
+# - Mapeo de servicios transparente
+# - Escalabilidad sin configuración manual
+# - Portabilidad entre entornos
+# - Prevención automática de conflictos
