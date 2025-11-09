@@ -1,0 +1,61 @@
+MIT License
+
+Copyright (c) 2025 MiniMax Agent - Framework Silhouette Enterprise Multi-Agent System
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+ADDITIONAL TERMS FOR FRAMEWORK SILHOUETTE V4.0:
+
+1. AUDIOVISUAL SYSTEM USAGE:
+   - The included AudioVisual System is designed for legitimate business use
+   - Users are responsible for ensuring compliance with applicable content policies
+   - Automated content generation should be reviewed before public distribution
+   - Respect intellectual property rights when using generated assets
+
+2. AI INTEGRATION:
+   - Third-party AI service usage is subject to respective service terms
+   - Users must comply with OpenAI, Anthropic, and other AI provider policies
+   - Data processed through AI services may be subject to provider retention policies
+   - Users are responsible for appropriate use of generated content
+
+3. ENTERPRISE DEPLOYMENT:
+   - Commercial deployment requires proper security configuration
+   - Production environments should use strong authentication mechanisms
+   - Regular security updates and monitoring are recommended
+   - Compliance with applicable data protection regulations (GDPR, CCPA, etc.)
+
+4. FRAMEWORK MODIFICATIONS:
+   - Modifications to the framework are permitted under this license
+   - Changes to the AudioVisual system should maintain quality standards
+   - Modified versions should clearly indicate they are derived works
+   - Attribution to the original Framework Silhouette V4.0 is appreciated
+
+5. SUPPORT AND MAINTENANCE:
+   - This software is provided "as is" without warranty
+   - Community support is available through GitHub issues
+   - Professional support options may be available separately
+   - Users are encouraged to contribute improvements back to the community
+
+6. THIRD-PARTY COMPONENTS:
+   - Various open-source dependencies are used under their respective licenses
+   - See package.json and individual component licenses for details
+   - Users must comply with all third-party license requirements
+   - Commercial use of third-party components may require additional licenses
+
+For questions about licensing or commercial usage, contact: licensing@silhouette-framework.com
