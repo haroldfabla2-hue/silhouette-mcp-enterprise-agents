@@ -1,0 +1,948 @@
+{
+  "activation_info": {
+    "timestamp": "2025-11-09 21:53:41",
+    "total_teams_configured": 78,
+    "teams_activated": 0,
+    "teams_failed": 78,
+    "success_rate": 0.0,
+    "framework_version": "4.0.0"
+  },
+  "health_status": {
+    "healthy_teams": [],
+    "unhealthy_teams": [
+      "audiovisual-team",
+      "business_development_team",
+      "cloud_services_team",
+      "code_generation_team",
+      "communications_team",
+      "context_management_team",
+      "customer_service_team",
+      "design_creative_team",
+      "finance_team",
+      "hr_team",
+      "legal_team",
+      "machine_learning_ai_team",
+      "manufacturing_team",
+      "marketing_team",
+      "notifications_communication_team",
+      "product_management_team",
+      "quality_assurance_team",
+      "research_team",
+      "risk_management_team",
+      "sales_team",
+      "security_team",
+      "strategy_team",
+      "supply_chain_team",
+      "support_team",
+      "testing_team",
+      "planner",
+      "prompt_engineer",
+      "mcp_server",
+      "multiagent-framework-expandido",
+      "api_gateway",
+      "orchestrator",
+      "worker",
+      "browser",
+      "optimization-team",
+      "master45-coordinator",
+      "dynamic-workflows-coordinator",
+      "workflow-optimization",
+      "dynamic-system-demo",
+      "audiovisual-workflow",
+      "business-continuity",
+      "data-science",
+      "it-infrastructure",
+      "legal-workflow",
+      "marketing-workflow",
+      "research-workflow",
+      "sales-workflow",
+      "strategic-planning",
+      "ultra-robust-qa",
+      "ai-team",
+      "compliance-team",
+      "cybersecurity-team",
+      "data-engineering-team",
+      "ecommerce-team",
+      "education-team",
+      "healthcare-team",
+      "logistics-team",
+      "manufacturing-industry-team",
+      "realestate-team",
+      "change-management",
+      "crisis-management",
+      "global-expansion",
+      "innovation-team",
+      "merger-acquisition",
+      "partnership-team",
+      "audiovisual-technology",
+      "animation-prompt-generator",
+      "audiovisual-coordinator",
+      "prompt-execution-engine",
+      "image-search-team",
+      "image-quality-verifier",
+      "audiovisual-integration",
+      "audiovisual-research",
+      "video-scene-composer",
+      "professional-script-generator",
+      "video-strategy-planner",
+      "requirements-manager",
+      "audit-team",
+      "sustainability-team"
+    ]
+  },
+  "communication_tests": [
+    {
+      "team": "orchestrator",
+      "status": "❌ FAIL",
+      "port": 8030
+    },
+    {
+      "team": "optimization-team",
+      "status": "❌ FAIL",
+      "port": 8033
+    }
+  ],
+  "resource_status": {
+    "cpu_percent": 8.6,
+    "memory_percent": 36.2,
+    "disk_percent": 20.1,
+    "status": "OK"
+  },
+  "ports_assigned": [
+    {
+      "team": "audiovisual-team",
+      "port": 8000,
+      "url": "http://localhost:8000",
+      "health_url": "http://localhost:8000/health"
+    },
+    {
+      "team": "business_development_team",
+      "port": 8001,
+      "url": "http://localhost:8001",
+      "health_url": "http://localhost:8001/health"
+    },
+    {
+      "team": "cloud_services_team",
+      "port": 8002,
+      "url": "http://localhost:8002",
+      "health_url": "http://localhost:8002/health"
+    },
+    {
+      "team": "code_generation_team",
+      "port": 8003,
+      "url": "http://localhost:8003",
+      "health_url": "http://localhost:8003/health"
+    },
+    {
+      "team": "communications_team",
+      "port": 8004,
+      "url": "http://localhost:8004",
+      "health_url": "http://localhost:8004/health"
+    },
+    {
+      "team": "context_management_team",
+      "port": 8005,
+      "url": "http://localhost:8005",
+      "health_url": "http://localhost:8005/health"
+    },
+    {
+      "team": "customer_service_team",
+      "port": 8006,
+      "url": "http://localhost:8006",
+      "health_url": "http://localhost:8006/health"
+    },
+    {
+      "team": "design_creative_team",
+      "port": 8007,
+      "url": "http://localhost:8007",
+      "health_url": "http://localhost:8007/health"
+    },
+    {
+      "team": "finance_team",
+      "port": 8008,
+      "url": "http://localhost:8008",
+      "health_url": "http://localhost:8008/health"
+    },
+    {
+      "team": "hr_team",
+      "port": 8009,
+      "url": "http://localhost:8009",
+      "health_url": "http://localhost:8009/health"
+    },
+    {
+      "team": "legal_team",
+      "port": 8010,
+      "url": "http://localhost:8010",
+      "health_url": "http://localhost:8010/health"
+    },
+    {
+      "team": "machine_learning_ai_team",
+      "port": 8011,
+      "url": "http://localhost:8011",
+      "health_url": "http://localhost:8011/health"
+    },
+    {
+      "team": "manufacturing_team",
+      "port": 8012,
+      "url": "http://localhost:8012",
+      "health_url": "http://localhost:8012/health"
+    },
+    {
+      "team": "marketing_team",
+      "port": 8013,
+      "url": "http://localhost:8013",
+      "health_url": "http://localhost:8013/health"
+    },
+    {
+      "team": "notifications_communication_team",
+      "port": 8014,
+      "url": "http://localhost:8014",
+      "health_url": "http://localhost:8014/health"
+    },
+    {
+      "team": "product_management_team",
+      "port": 8015,
+      "url": "http://localhost:8015",
+      "health_url": "http://localhost:8015/health"
+    },
+    {
+      "team": "quality_assurance_team",
+      "port": 8016,
+      "url": "http://localhost:8016",
+      "health_url": "http://localhost:8016/health"
+    },
+    {
+      "team": "research_team",
+      "port": 8017,
+      "url": "http://localhost:8017",
+      "health_url": "http://localhost:8017/health"
+    },
+    {
+      "team": "risk_management_team",
+      "port": 8018,
+      "url": "http://localhost:8018",
+      "health_url": "http://localhost:8018/health"
+    },
+    {
+      "team": "sales_team",
+      "port": 8019,
+      "url": "http://localhost:8019",
+      "health_url": "http://localhost:8019/health"
+    },
+    {
+      "team": "security_team",
+      "port": 8020,
+      "url": "http://localhost:8020",
+      "health_url": "http://localhost:8020/health"
+    },
+    {
+      "team": "strategy_team",
+      "port": 8021,
+      "url": "http://localhost:8021",
+      "health_url": "http://localhost:8021/health"
+    },
+    {
+      "team": "supply_chain_team",
+      "port": 8022,
+      "url": "http://localhost:8022",
+      "health_url": "http://localhost:8022/health"
+    },
+    {
+      "team": "support_team",
+      "port": 8023,
+      "url": "http://localhost:8023",
+      "health_url": "http://localhost:8023/health"
+    },
+    {
+      "team": "testing_team",
+      "port": 8024,
+      "url": "http://localhost:8024",
+      "health_url": "http://localhost:8024/health"
+    },
+    {
+      "team": "planner",
+      "port": 8025,
+      "url": "http://localhost:8025",
+      "health_url": "http://localhost:8025/health"
+    },
+    {
+      "team": "prompt_engineer",
+      "port": 8026,
+      "url": "http://localhost:8026",
+      "health_url": "http://localhost:8026/health"
+    },
+    {
+      "team": "mcp_server",
+      "port": 8027,
+      "url": "http://localhost:8027",
+      "health_url": "http://localhost:8027/health"
+    },
+    {
+      "team": "multiagent-framework-expandido",
+      "port": 8028,
+      "url": "http://localhost:8028",
+      "health_url": "http://localhost:8028/health"
+    },
+    {
+      "team": "api_gateway",
+      "port": 8029,
+      "url": "http://localhost:8029",
+      "health_url": "http://localhost:8029/health"
+    },
+    {
+      "team": "orchestrator",
+      "port": 8030,
+      "url": "http://localhost:8030",
+      "health_url": "http://localhost:8030/health"
+    },
+    {
+      "team": "worker",
+      "port": 8031,
+      "url": "http://localhost:8031",
+      "health_url": "http://localhost:8031/health"
+    },
+    {
+      "team": "browser",
+      "port": 8032,
+      "url": "http://localhost:8032",
+      "health_url": "http://localhost:8032/health"
+    },
+    {
+      "team": "optimization-team",
+      "port": 8033,
+      "url": "http://localhost:8033",
+      "health_url": "http://localhost:8033/health"
+    },
+    {
+      "team": "master45-coordinator",
+      "port": 8034,
+      "url": "http://localhost:8034",
+      "health_url": "http://localhost:8034/health"
+    },
+    {
+      "team": "dynamic-workflows-coordinator",
+      "port": 8035,
+      "url": "http://localhost:8035",
+      "health_url": "http://localhost:8035/health"
+    },
+    {
+      "team": "workflow-optimization",
+      "port": 8036,
+      "url": "http://localhost:8036",
+      "health_url": "http://localhost:8036/health"
+    },
+    {
+      "team": "dynamic-system-demo",
+      "port": 8037,
+      "url": "http://localhost:8037",
+      "health_url": "http://localhost:8037/health"
+    },
+    {
+      "team": "audiovisual-workflow",
+      "port": 8038,
+      "url": "http://localhost:8038",
+      "health_url": "http://localhost:8038/health"
+    },
+    {
+      "team": "business-continuity",
+      "port": 8039,
+      "url": "http://localhost:8039",
+      "health_url": "http://localhost:8039/health"
+    },
+    {
+      "team": "data-science",
+      "port": 8040,
+      "url": "http://localhost:8040",
+      "health_url": "http://localhost:8040/health"
+    },
+    {
+      "team": "it-infrastructure",
+      "port": 8041,
+      "url": "http://localhost:8041",
+      "health_url": "http://localhost:8041/health"
+    },
+    {
+      "team": "legal-workflow",
+      "port": 8042,
+      "url": "http://localhost:8042",
+      "health_url": "http://localhost:8042/health"
+    },
+    {
+      "team": "marketing-workflow",
+      "port": 8043,
+      "url": "http://localhost:8043",
+      "health_url": "http://localhost:8043/health"
+    },
+    {
+      "team": "research-workflow",
+      "port": 8044,
+      "url": "http://localhost:8044",
+      "health_url": "http://localhost:8044/health"
+    },
+    {
+      "team": "sales-workflow",
+      "port": 8045,
+      "url": "http://localhost:8045",
+      "health_url": "http://localhost:8045/health"
+    },
+    {
+      "team": "strategic-planning",
+      "port": 8046,
+      "url": "http://localhost:8046",
+      "health_url": "http://localhost:8046/health"
+    },
+    {
+      "team": "ultra-robust-qa",
+      "port": 8047,
+      "url": "http://localhost:8047",
+      "health_url": "http://localhost:8047/health"
+    },
+    {
+      "team": "ai-team",
+      "port": 8048,
+      "url": "http://localhost:8048",
+      "health_url": "http://localhost:8048/health"
+    },
+    {
+      "team": "compliance-team",
+      "port": 8049,
+      "url": "http://localhost:8049",
+      "health_url": "http://localhost:8049/health"
+    },
+    {
+      "team": "cybersecurity-team",
+      "port": 8050,
+      "url": "http://localhost:8050",
+      "health_url": "http://localhost:8050/health"
+    },
+    {
+      "team": "data-engineering-team",
+      "port": 8051,
+      "url": "http://localhost:8051",
+      "health_url": "http://localhost:8051/health"
+    },
+    {
+      "team": "ecommerce-team",
+      "port": 8052,
+      "url": "http://localhost:8052",
+      "health_url": "http://localhost:8052/health"
+    },
+    {
+      "team": "education-team",
+      "port": 8053,
+      "url": "http://localhost:8053",
+      "health_url": "http://localhost:8053/health"
+    },
+    {
+      "team": "healthcare-team",
+      "port": 8054,
+      "url": "http://localhost:8054",
+      "health_url": "http://localhost:8054/health"
+    },
+    {
+      "team": "logistics-team",
+      "port": 8055,
+      "url": "http://localhost:8055",
+      "health_url": "http://localhost:8055/health"
+    },
+    {
+      "team": "manufacturing-industry-team",
+      "port": 8056,
+      "url": "http://localhost:8056",
+      "health_url": "http://localhost:8056/health"
+    },
+    {
+      "team": "realestate-team",
+      "port": 8057,
+      "url": "http://localhost:8057",
+      "health_url": "http://localhost:8057/health"
+    },
+    {
+      "team": "change-management",
+      "port": 8058,
+      "url": "http://localhost:8058",
+      "health_url": "http://localhost:8058/health"
+    },
+    {
+      "team": "crisis-management",
+      "port": 8059,
+      "url": "http://localhost:8059",
+      "health_url": "http://localhost:8059/health"
+    },
+    {
+      "team": "global-expansion",
+      "port": 8060,
+      "url": "http://localhost:8060",
+      "health_url": "http://localhost:8060/health"
+    },
+    {
+      "team": "innovation-team",
+      "port": 8061,
+      "url": "http://localhost:8061",
+      "health_url": "http://localhost:8061/health"
+    },
+    {
+      "team": "merger-acquisition",
+      "port": 8062,
+      "url": "http://localhost:8062",
+      "health_url": "http://localhost:8062/health"
+    },
+    {
+      "team": "partnership-team",
+      "port": 8063,
+      "url": "http://localhost:8063",
+      "health_url": "http://localhost:8063/health"
+    },
+    {
+      "team": "audiovisual-technology",
+      "port": 8064,
+      "url": "http://localhost:8064",
+      "health_url": "http://localhost:8064/health"
+    },
+    {
+      "team": "animation-prompt-generator",
+      "port": 8065,
+      "url": "http://localhost:8065",
+      "health_url": "http://localhost:8065/health"
+    },
+    {
+      "team": "audiovisual-coordinator",
+      "port": 8066,
+      "url": "http://localhost:8066",
+      "health_url": "http://localhost:8066/health"
+    },
+    {
+      "team": "prompt-execution-engine",
+      "port": 8067,
+      "url": "http://localhost:8067",
+      "health_url": "http://localhost:8067/health"
+    },
+    {
+      "team": "image-search-team",
+      "port": 8068,
+      "url": "http://localhost:8068",
+      "health_url": "http://localhost:8068/health"
+    },
+    {
+      "team": "image-quality-verifier",
+      "port": 8069,
+      "url": "http://localhost:8069",
+      "health_url": "http://localhost:8069/health"
+    },
+    {
+      "team": "audiovisual-integration",
+      "port": 8070,
+      "url": "http://localhost:8070",
+      "health_url": "http://localhost:8070/health"
+    },
+    {
+      "team": "audiovisual-research",
+      "port": 8071,
+      "url": "http://localhost:8071",
+      "health_url": "http://localhost:8071/health"
+    },
+    {
+      "team": "video-scene-composer",
+      "port": 8072,
+      "url": "http://localhost:8072",
+      "health_url": "http://localhost:8072/health"
+    },
+    {
+      "team": "professional-script-generator",
+      "port": 8073,
+      "url": "http://localhost:8073",
+      "health_url": "http://localhost:8073/health"
+    },
+    {
+      "team": "video-strategy-planner",
+      "port": 8074,
+      "url": "http://localhost:8074",
+      "health_url": "http://localhost:8074/health"
+    },
+    {
+      "team": "requirements-manager",
+      "port": 8075,
+      "url": "http://localhost:8075",
+      "health_url": "http://localhost:8075/health"
+    },
+    {
+      "team": "audit-team",
+      "port": 8076,
+      "url": "http://localhost:8076",
+      "health_url": "http://localhost:8076/health"
+    },
+    {
+      "team": "sustainability-team",
+      "port": 8077,
+      "url": "http://localhost:8077",
+      "health_url": "http://localhost:8077/health"
+    }
+  ],
+  "processes_started": [
+    {
+      "name": "BusinessContinuityTeam",
+      "file": "/workspace/optimization-team/team-workflows/BusinessContinuityTeam.js",
+      "start_time": 1762696402.5436015
+    },
+    {
+      "name": "DataScienceTeam",
+      "file": "/workspace/optimization-team/team-workflows/DataScienceTeam.js",
+      "start_time": 1762696402.6440654
+    },
+    {
+      "name": "ITInfrastructureTeam",
+      "file": "/workspace/optimization-team/team-workflows/ITInfrastructureTeam.js",
+      "start_time": 1762696402.744559
+    },
+    {
+      "name": "LegalTeam",
+      "file": "/workspace/optimization-team/team-workflows/LegalTeam.js",
+      "start_time": 1762696402.8450468
+    },
+    {
+      "name": "StrategicPlanningTeam",
+      "file": "/workspace/optimization-team/team-workflows/StrategicPlanningTeam.js",
+      "start_time": 1762696402.9455268
+    },
+    {
+      "name": "WorkflowOptimizationTeam",
+      "file": "/workspace/optimization-team/team-workflows/WorkflowOptimizationTeam.js",
+      "start_time": 1762696403.0460248
+    },
+    {
+      "name": "AITeam",
+      "file": "/workspace/optimization-team/team-workflows/ai/AITeam.js",
+      "start_time": 1762696403.1464796
+    },
+    {
+      "name": "ComplianceTeam",
+      "file": "/workspace/optimization-team/team-workflows/compliance/ComplianceTeam.js",
+      "start_time": 1762696403.2470975
+    },
+    {
+      "name": "CybersecurityTeam",
+      "file": "/workspace/optimization-team/team-workflows/cybersecurity/CybersecurityTeam.js",
+      "start_time": 1762696403.3475676
+    },
+    {
+      "name": "DataEngineeringTeam",
+      "file": "/workspace/optimization-team/team-workflows/data-engineering/DataEngineeringTeam.js",
+      "start_time": 1762696403.4480689
+    },
+    {
+      "name": "EcommerceTeam",
+      "file": "/workspace/optimization-team/team-workflows/industry/EcommerceTeam.js",
+      "start_time": 1762696403.5485926
+    },
+    {
+      "name": "EducationTeam",
+      "file": "/workspace/optimization-team/team-workflows/industry/EducationTeam.js",
+      "start_time": 1762696403.6491177
+    },
+    {
+      "name": "HealthcareTeam",
+      "file": "/workspace/optimization-team/team-workflows/industry/HealthcareTeam.js",
+      "start_time": 1762696403.7496448
+    },
+    {
+      "name": "LogisticsTeam",
+      "file": "/workspace/optimization-team/team-workflows/industry/LogisticsTeam.js",
+      "start_time": 1762696403.850167
+    },
+    {
+      "name": "ManufacturingTeam",
+      "file": "/workspace/optimization-team/team-workflows/industry/ManufacturingTeam.js",
+      "start_time": 1762696403.950675
+    },
+    {
+      "name": "RealEstateTeam",
+      "file": "/workspace/optimization-team/team-workflows/industry/RealEstateTeam.js",
+      "start_time": 1762696404.0511603
+    },
+    {
+      "name": "AuditTeam",
+      "file": "/workspace/optimization-team/team-workflows/specialized/AuditTeam.js",
+      "start_time": 1762696404.151747
+    },
+    {
+      "name": "SustainabilityTeam",
+      "file": "/workspace/optimization-team/team-workflows/specialized/SustainabilityTeam.js",
+      "start_time": 1762696404.2527385
+    },
+    {
+      "name": "ChangeManagementTeam",
+      "file": "/workspace/optimization-team/team-workflows/strategic/ChangeManagementTeam.js",
+      "start_time": 1762696404.3532665
+    },
+    {
+      "name": "CrisisManagementTeam",
+      "file": "/workspace/optimization-team/team-workflows/strategic/CrisisManagementTeam.js",
+      "start_time": 1762696404.4537914
+    },
+    {
+      "name": "GlobalExpansionTeam",
+      "file": "/workspace/optimization-team/team-workflows/strategic/GlobalExpansionTeam.js",
+      "start_time": 1762696404.5543149
+    },
+    {
+      "name": "InnovationTeam",
+      "file": "/workspace/optimization-team/team-workflows/strategic/InnovationTeam.js",
+      "start_time": 1762696404.6548579
+    },
+    {
+      "name": "MergerAcquisitionTeam",
+      "file": "/workspace/optimization-team/team-workflows/strategic/MergerAcquisitionTeam.js",
+      "start_time": 1762696404.7553997
+    },
+    {
+      "name": "PartnershipTeam",
+      "file": "/workspace/optimization-team/team-workflows/strategic/PartnershipTeam.js",
+      "start_time": 1762696404.8559637
+    },
+    {
+      "name": "AudioVisualTeam",
+      "file": "/workspace/optimization-team/team-workflows/technology/AudioVisualTeam.js",
+      "start_time": 1762696404.956457
+    },
+    {
+      "name": "BlockchainTeam",
+      "file": "/workspace/optimization-team/team-workflows/technology/BlockchainTeam.js",
+      "start_time": 1762696405.057017
+    },
+    {
+      "name": "CloudInfrastructureTeam",
+      "file": "/workspace/optimization-team/team-workflows/technology/CloudInfrastructureTeam.js",
+      "start_time": 1762696405.1575317
+    },
+    {
+      "name": "IoTTeam",
+      "file": "/workspace/optimization-team/team-workflows/technology/IoTTeam.js",
+      "start_time": 1762696405.2580655
+    },
+    {
+      "name": "MobileDevelopmentTeam",
+      "file": "/workspace/optimization-team/team-workflows/technology/MobileDevelopmentTeam.js",
+      "start_time": 1762696405.3585904
+    },
+    {
+      "name": "WebDevelopmentTeam",
+      "file": "/workspace/optimization-team/team-workflows/technology/WebDevelopmentTeam.js",
+      "start_time": 1762696405.4590878
+    },
+    {
+      "name": "AudioVisualWorkflow",
+      "file": "/workspace/optimization-team/team-workflows/AudioVisualWorkflow.js",
+      "start_time": 1762696405.5596309
+    },
+    {
+      "name": "MarketingWorkflow",
+      "file": "/workspace/optimization-team/team-workflows/MarketingWorkflow.js",
+      "start_time": 1762696405.6601756
+    },
+    {
+      "name": "ResearchWorkflow",
+      "file": "/workspace/optimization-team/team-workflows/ResearchWorkflow.js",
+      "start_time": 1762696405.7606964
+    },
+    {
+      "name": "SalesWorkflow",
+      "file": "/workspace/optimization-team/team-workflows/SalesWorkflow.js",
+      "start_time": 1762696405.861223
+    },
+    {
+      "name": "CustomerSuccessWorkflow",
+      "file": "/workspace/optimization-team/team-workflows/phase3/CustomerSuccessWorkflow.js",
+      "start_time": 1762696405.9617772
+    },
+    {
+      "name": "FinanceWorkflow",
+      "file": "/workspace/optimization-team/team-workflows/phase3/FinanceWorkflow.js",
+      "start_time": 1762696406.0623057
+    },
+    {
+      "name": "HRWorkflow",
+      "file": "/workspace/optimization-team/team-workflows/phase3/HRWorkflow.js",
+      "start_time": 1762696406.162872
+    },
+    {
+      "name": "OperationsWorkflow",
+      "file": "/workspace/optimization-team/team-workflows/phase3/OperationsWorkflow.js",
+      "start_time": 1762696406.2634225
+    },
+    {
+      "name": "ProductWorkflow",
+      "file": "/workspace/optimization-team/team-workflows/phase3/ProductWorkflow.js",
+      "start_time": 1762696406.363941
+    },
+    {
+      "name": "ImageSearchTeam",
+      "file": "/workspace/audiovisual-team/image-search-team/ImageSearchTeam.js",
+      "start_time": 1762696406.4872453
+    },
+    {
+      "name": "AudioVisualResearchTeam",
+      "file": "/workspace/audiovisual-team/research-team/AudioVisualResearchTeam.js",
+      "start_time": 1762696406.5877752
+    },
+    {
+      "name": "ImageSearchTeam",
+      "file": "/workspace/src/teams/audiovisual/image-search-team/ImageSearchTeam.js",
+      "start_time": 1762696406.7106924
+    },
+    {
+      "name": "AudioVisualResearchTeam",
+      "file": "/workspace/src/teams/audiovisual/research-team/AudioVisualResearchTeam.js",
+      "start_time": 1762696406.8111475
+    },
+    {
+      "name": "api_gateway",
+      "file": "/workspace/api_gateway/main.py",
+      "start_time": 1762696409.923354
+    },
+    {
+      "name": "audiovisual-team",
+      "file": "/workspace/audiovisual-team/main.py",
+      "start_time": 1762696410.1244104
+    },
+    {
+      "name": "business_development_team",
+      "file": "/workspace/business_development_team/main.py",
+      "start_time": 1762696410.3275912
+    },
+    {
+      "name": "cloud_services_team",
+      "file": "/workspace/cloud_services_team/main.py",
+      "start_time": 1762696410.529455
+    },
+    {
+      "name": "code_generation_team",
+      "file": "/workspace/code_generation_team/main.py",
+      "start_time": 1762696410.7307484
+    },
+    {
+      "name": "communications_team",
+      "file": "/workspace/communications_team/main.py",
+      "start_time": 1762696410.9320948
+    },
+    {
+      "name": "context_management_team",
+      "file": "/workspace/context_management_team/main.py",
+      "start_time": 1762696411.1348686
+    },
+    {
+      "name": "customer_service_team",
+      "file": "/workspace/customer_service_team/main.py",
+      "start_time": 1762696411.3364062
+    },
+    {
+      "name": "design_creative_team",
+      "file": "/workspace/design_creative_team/main.py",
+      "start_time": 1762696411.5393584
+    },
+    {
+      "name": "finance_team",
+      "file": "/workspace/finance_team/main.py",
+      "start_time": 1762696411.743139
+    },
+    {
+      "name": "hr_team",
+      "file": "/workspace/hr_team/main.py",
+      "start_time": 1762696411.9445775
+    },
+    {
+      "name": "legal_team",
+      "file": "/workspace/legal_team/main.py",
+      "start_time": 1762696412.146736
+    },
+    {
+      "name": "machine_learning_ai_team",
+      "file": "/workspace/machine_learning_ai_team/main.py",
+      "start_time": 1762696412.348258
+    },
+    {
+      "name": "manufacturing_team",
+      "file": "/workspace/manufacturing_team/main.py",
+      "start_time": 1762696412.5497172
+    },
+    {
+      "name": "marketing_team",
+      "file": "/workspace/marketing_team/main.py",
+      "start_time": 1762696412.7511346
+    },
+    {
+      "name": "mcp_server",
+      "file": "/workspace/mcp_server/main.py",
+      "start_time": 1762696412.9526234
+    },
+    {
+      "name": "notifications_communication_team",
+      "file": "/workspace/notifications_communication_team/main.py",
+      "start_time": 1762696413.1549606
+    },
+    {
+      "name": "orchestrator",
+      "file": "/workspace/orchestrator/main.py",
+      "start_time": 1762696413.356995
+    },
+    {
+      "name": "planner",
+      "file": "/workspace/planner/main.py",
+      "start_time": 1762696413.5584233
+    },
+    {
+      "name": "product_management_team",
+      "file": "/workspace/product_management_team/main.py",
+      "start_time": 1762696413.7600372
+    },
+    {
+      "name": "prompt_engineer",
+      "file": "/workspace/prompt_engineer/main.py",
+      "start_time": 1762696413.9615161
+    },
+    {
+      "name": "quality_assurance_team",
+      "file": "/workspace/quality_assurance_team/main.py",
+      "start_time": 1762696414.1630743
+    },
+    {
+      "name": "research_team",
+      "file": "/workspace/research_team/main.py",
+      "start_time": 1762696414.3645983
+    },
+    {
+      "name": "risk_management_team",
+      "file": "/workspace/risk_management_team/main.py",
+      "start_time": 1762696414.5660958
+    },
+    {
+      "name": "sales_team",
+      "file": "/workspace/sales_team/main.py",
+      "start_time": 1762696414.7675095
+    },
+    {
+      "name": "security_team",
+      "file": "/workspace/security_team/main.py",
+      "start_time": 1762696414.9696548
+    },
+    {
+      "name": "strategy_team",
+      "file": "/workspace/strategy_team/main.py",
+      "start_time": 1762696415.1721385
+    },
+    {
+      "name": "supply_chain_team",
+      "file": "/workspace/supply_chain_team/main.py",
+      "start_time": 1762696415.373557
+    },
+    {
+      "name": "support_team",
+      "file": "/workspace/support_team/main.py",
+      "start_time": 1762696415.574881
+    },
+    {
+      "name": "testing_team",
+      "file": "/workspace/testing_team/main.py",
+      "start_time": 1762696415.7763834
+    }
+  ]
+}
