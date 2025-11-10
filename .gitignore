@@ -605,9 +605,9 @@
 # DEVOPS & CONTAINERS
 # ==============================================================================
 # Docker
-**/Dockerfile*
+# **/Dockerfile*  # CRÍTICO: Framework necesita Dockerfiles
 **/.dockerignore
-**/docker-compose*.yml
+# **/docker-compose*.yml  # CRÍTICO: Framework necesita docker-compose files
 **/.docker/
 
 # Kubernetes

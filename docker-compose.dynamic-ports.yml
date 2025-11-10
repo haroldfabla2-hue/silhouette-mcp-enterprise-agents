@@ -1,0 +1,127 @@
+# Framework Silhouette V4.0 - Docker Compose con Puertos Dinámicos
+# 78 Equipos Especializados - Sistema de Asignación Automática de Puertos
+# Autor: MiniMax Agent
+# Fecha: 2025-11-10
+# Generado automáticamente por PortAllocator
+
+version: '3.8'
+
+services:
+  # ===== INFRAESTRUCTURA BASE =====
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - "8000:8000"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-silhouette}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-silhouette2024}
+      POSTGRES_DB: ${POSTGRES_DB:-silhouette_db}
+    volumes:
+      - "postgres_data:/var/lib/postgresql/data"
+    networks:
+      - silhouette_network
+    restart: unless-stopped
+    healthcheck:
+      test: CMD-SHELL,pg_isready -U ${POSTGRES_USER:-silhouette}
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "8001:8000"
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-silhouette2024}
+    networks:
+      - silhouette_network
+    restart: unless-stopped
+    command: redis-server --requirepass ${REDIS_PASSWORD:-silhouette2024} --appendonly yes --maxmemory 1gb --maxmemory-policy allkeys-lru
+
+
+  # ===== SERVICIOS PRINCIPALES =====
+  orchestrator:
+    build:
+      context: ../orchestrator
+      dockerfile: Dockerfile
+    container_name: silhouette_orchestrator
+    ports:
+      - "8000:8000"
+    environment:
+      SERVICE_NAME: orchestrator
+      SERVICE_TYPE: service
+      PORT: 8000
+    volumes:
+      - "../orchestrator:/app"
+    networks:
+      - silhouette_network
+    restart: unless-stopped
+    working_dir: /app
+    command: npm start
+    depends_on:
+      - postgres
+      - redis
+
+  api_gateway:
+    build:
+      context: ../api_gateway
+      dockerfile: Dockerfile
+    container_name: silhouette_api_gateway
+    ports:
+      - "8080:8000"
+    environment:
+      SERVICE_NAME: api_gateway
+      SERVICE_TYPE: service
+      PORT: 8080
+    volumes:
+      - "../api_gateway:/app"
+    networks:
+      - silhouette_network
+    restart: unless-stopped
+    working_dir: /app
+    command: npm start
+    depends_on:
+      - postgres
+      - redis
+
+
+  # ===== EQUIPOS EMPRESARIALES =====
+
+  # ===== SISTEMA AVANZADO DE GESTIÓN DE CONTEXTO =====
+  context_management_team:
+    build: ./context_management_team
+    ports:
+      - "8070:8070"
+    environment:
+      - CONTEXT_MANAGER_PORT=8070
+      - NODE_ENV=production
+    volumes:
+      - "context_data:/app/data"
+    networks:
+      - silhouette_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:8070/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    depends_on:
+      - postgres
+      - redis
+
+  # ===== EQUIPOS DE OPTIMIZACIÓN Y WORKFLOWS =====
+
+networks:
+  silhouette_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
+  context_data:
+    driver: local
+
+volumes:
+  postgres_data:
+    driver: local
