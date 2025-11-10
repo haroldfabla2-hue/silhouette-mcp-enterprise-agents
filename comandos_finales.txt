@@ -1,9 +1,0 @@
-# Comandos finales para subir a GitHub
-
-cd multiagent-framework-expandido
-git push -u origin main
-
-# O si necesitas hacer commit primero:
-git add .
-git commit -m "Update: Silhouette MCP Enterprise Agents - Complete Integration Guide"
-git push -u origin main
