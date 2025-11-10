@@ -1,39 +1,35 @@
-FROM python:3.11-slim
+# Context Management Team Dockerfile
+FROM node:18-alpine
 
-# Instalar dependencias del sistema para análisis de contexto
-RUN apt-get update && apt-get install -y \
-    gcc \
-    g++ \
-    curl \
-    git \
-    tree \
-    && rm -rf /var/lib/apt/lists/*
-
-# Crear usuario no-root para seguridad
-RUN groupadd -r context && useradd -r -g context context
-
-# Establecer directorio de trabajo
+# Set working directory
 WORKDIR /app
 
-# Copiar requirements primero para aprovechar cache de Docker
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Copy package files
+COPY package*.json ./
+COPY requirements.txt ./
 
-# Copiar código de la aplicación
+# Install dependencies
+RUN npm install --production
+
+# Copy source code
 COPY . .
 
-# Cambiar propietario de archivos
-RUN chown -R context:context /app
+# Create non-root user
+RUN addgroup -g 1001 -S contextmgr && \
+    adduser -S contextmgr -u 1001
 
-# Cambiar a usuario no-root
-USER context
+# Change ownership of app directory
+RUN chown -R contextmgr:contextmgr /app
 
-# Exponer puerto
-EXPOSE 8000
+# Switch to non-root user
+USER contextmgr
+
+# Expose port
+EXPOSE 8070
 
 # Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
-    CMD curl -f http://localhost:8000/health || exit 1
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD node -e "require('http').get('http://localhost:8070/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"
 
-# Comando por defecto
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Start the service
+CMD ["node", "main.js"]
