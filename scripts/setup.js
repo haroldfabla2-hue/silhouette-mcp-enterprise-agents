@@ -422,7 +422,7 @@ DATABASE_URL=sqlite:./data/framework.db
 REDIS_URL=redis://localhost:6379
 
 # === SEGURIDAD ===
-JWT_SECRET=silhouette-super-secret-jwt-key-2025-change-in-production
+JWT_SECRET=your-jwt-secret-change-in-production
 API_KEY=silhouette-api-key-2025-change-in-production
 
 # === SISTEMA AUDIOVISUAL ===
